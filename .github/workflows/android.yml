@@ -1,0 +1,25 @@
+
+name: Gerar APK Android
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    name: Compilar Monitor de Pilha
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Compilar com Buildozer
+        id: buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          buildozer_version: stable
+
+      - name: Disponibilizar o APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-pilha-apk
+          path: ${{ steps.buildozer.outputs.filename }}
