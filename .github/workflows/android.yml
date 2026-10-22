@@ -38,7 +38,7 @@ jobs:
 
       - name: Compilar APK
         run: |
-          buildozer android debug
+          yes | buildozer -v android debug
 
       - name: Guardar APK
         uses: actions/upload-artifact@v4
